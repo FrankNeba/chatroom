@@ -1,0 +1,39 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<style>
+    #homecontainer{
+        display: grid;
+        grid-template-columns:  1fr 3fr 1fr;
+        gap: 2rem;
+        padding: 1rem;
+    }
+</style>
+
+<h1>Home</h1> <br>
+<div>
+    <div id="homecontainer">
+
+        <div>
+            {% include 'socialsite/topics.html' %}
+           
+        </div>
+        <div>
+            <h5>{{room_count}} rooms available</h5>
+            <a href="{% url 'create-room' %}">Create Room</a>
+            <hr>
+            <div>
+                {% include 'socialsite/rooms.html' %}
+            </div>
+           
+        </div>
+         <div>
+            {% include 'socialsite/activity.html' %}
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
+
