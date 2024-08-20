@@ -14,7 +14,8 @@
     
 
 <div class="comment">
-    <h1>{{room.name|capfirst}}</h1>
+    <h3>@{{room.host.username|capfirst}}</h3>
+    <h2>{{room.name|capfirst}}</h2>
 
         <p>{{room.description|capfirst}}</p>
         <small>Posted {{room.created|timesince}}</small>
@@ -22,12 +23,14 @@
     <hr>
     {% for message in roommessages %}
         <div>
+            
+            <a href="{% url 'profiles' message.user.id%}"><small>@{{message.user|capfirst}} </small></a><br>
+            <p>{{message.body|capfirst}}</p>
+
             {% if request.user == message.user %}
             <a href="{% url 'delete_message' message.id %}">Delete</a>
 
             {% endif %}
-            <small>@{{message.user|capfirst}} <br></small>
-            <p>{{message.body|capfirst}}</p>
             <small>{{message.created|timesince}} ago</small>
             <hr>
         </div>
@@ -50,11 +53,11 @@
 </div>
 
 <div>
-    <h3>participants</h3>
+    <h3>{{participantNumber}} participants</h3>
     <hr>
     {% for participant in participants %}
     <div>
-        <p>@{{participant.username|capfirst}}</p>
+        <a href="{% url 'profiles' participant.id %}"><p>@{{participant.username|capfirst}}</p></a>
     </div>
     {% endfor %}
 

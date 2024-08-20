@@ -1,6 +1,8 @@
+
+
 {% for room in rooms %}
             
-                <a href="{% url 'profiles' room.host.id %}">Created by @{{room.host.username|capfirst}}</a>
+               <p> Created by<a href="{% url 'profiles' room.host.id %}"> @{{room.host.username|capfirst}}</a></p>
                 <p> <a href="{% url 'room' room.id %}">{{room.name|capfirst}}</a> </p>
                 <small>{{room.topic.name|capfirst}} </small>
                 <p> {% if request.user.id == room.host.id %}

@@ -3,7 +3,7 @@
 {% block content %}
 
 <style>
-    #homecontainer{
+    .homecontainer{
         display: grid;
         grid-template-columns:  1fr 3fr 1fr;
         gap: 2rem;
@@ -13,13 +13,14 @@
 
 <h1>Home</h1> <br>
 <div>
-    <div id="homecontainer">
+    <div class="homecontainer">
 
         <div>
             {% include 'socialsite/topics.html' %}
            
         </div>
         <div>
+            <h1>Rooms</h1>
             <h5>{{room_count}} rooms available</h5>
             <a href="{% url 'create-room' %}">Create Room</a>
             <hr>

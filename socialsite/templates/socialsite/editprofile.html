@@ -1,0 +1,26 @@
+{% extends 'main.html' %}
+
+{% block content%}
+
+    <form action="" method="post">
+        {% csrf_token %}
+        <!-- {% comment %} <label for="username">Username:</label>
+        <input type="text" value="{{user.username}}" name="username"><br><br> {% endcomment %}
+
+        {% comment %} <label for="password1">Enter new password:</label>
+        <input type="password" name="password1" ><br><br>
+
+        <label for="password2">Confirm new password</label>
+        <input type="password" name="password2"><br><br> {% endcomment %}
+
+        {% comment %} <button type="submit"> Save </button> {% endcomment %}-->
+        <label for="username">Username</label>
+        {{form.username}} <br> <br> 
+
+        <label for="email">Email</label>
+        {{form.email}} <br> <br>
+
+        <button type="submit">Save</button>
+    </form>
+
+{% endblock content %}

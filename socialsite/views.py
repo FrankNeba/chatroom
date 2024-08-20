@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.http import HttpResponse
 from .models import Room, Topic, Message
-from .forms import RoomForm
+from .forms import RoomForm, UserForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 
@@ -43,6 +43,7 @@ def room(request, pk):
             room = i
             roommessages = room.message_set.all().order_by('-created')
             participants = room.participants.all()
+            participantNumber = participants.count()
 
             if request.method == 'POST':
                 message = Message.objects.create(
@@ -52,7 +53,7 @@ def room(request, pk):
                 )
                 room.participants.add(request.user)
                 return redirect('room', pk=room.id)
-    context = {'room':room, 'roommessages': roommessages, 'participants':participants}
+    context = {'room':room, 'roommessages': roommessages, 'participants':participants,'participantNumber': participantNumber}
     return render(request, 'socialsite/room.html', context)
 
 @login_required(login_url='/login')
@@ -158,5 +159,40 @@ def deleteMessage(request, pk):
 
 def userProfile(request, pk):
     user = User.objects.get(id=pk)
-    context = {'user':user}
+    rooms = Room.objects.filter(host = user)
+    topics = []
+    # topics = user.room_set.all().topic
+    for room in rooms:
+        if room.topic in topics:
+            pass
+        else:
+            topics.append(room.topic)
+    
+
+    message = Message.objects.filter(user = user)
+    context = {'user':user, 'rooms':rooms,'roommessages': message,'topic': topics}
     return render(request, 'socialsite/profile.html', context)
+
+
+@login_required(login_url='login')
+def editProfile(request, pk):
+    user = User.objects.get(id = pk)
+    form=UserForm(instance = user)
+    if request.method =='POST':
+        form = UserForm(request.POST, instance = user)
+        if form.is_valid():
+            form.save()
+            # return redirect('profile')
+            return HttpResponse("saved succesfully")
+        # password1 = request.POST.get('password1')
+        # password2 = request.POST.get('password2')
+        # if password1 != password2:
+        #     return messages.error(request, "passwords don't match")
+        # if len(password1) < 8:
+        #     return messages.error(request, 'password too short')
+        # user.username = username
+        # user.set_password = password1
+        # user.save()
+        return messages.error(request, 'invalid email or username exists')
+    context = {'form': form}
+    return render(request, 'socialsite/editprofile.html', context )
