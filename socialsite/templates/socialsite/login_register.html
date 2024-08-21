@@ -5,7 +5,7 @@
     <div>
         <form action="" method="post">
             {% csrf_token %}
-            <label for="username">Username:</label>
+            <label for="username">Email:</label>
             <input type="text" name="username" placeholder="Enter Username">
             <br><br>
             <label for="password">Password</label>
@@ -23,14 +23,24 @@
         <form action="" method="post">
             {% csrf_token %}
 
-                <label for="username">Username:</label>
-                {{form.username}} <br><br>
+
+                <label for="username">username:</label>
+                {{form.username}} <br><br> 
+
+
+             <label for="username">email:</label>
+            {{form.email}} <br><br>
+
+                 
 
                 <label for="password1">Enter password:</label>
                 {{form.password1}} <br><br>
 
                 <label for="password2">Confirm password:</label>
-                {{form.password2}} <br><br>
+                {{form.password2}} <br><br> 
+
+
+                {% comment %} {{form}} {% endcomment %}
             <input type="submit" value="Register">
         </form>
         <p>Already have an account?</p>

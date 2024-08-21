@@ -1,11 +1,10 @@
 from django.shortcuts import render, redirect
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.http import HttpResponse
-from .models import Room, Topic, Message
-from .forms import RoomForm, UserForm
+from .models import Room, Topic, Message, User
+from .forms import RoomForm, UserForm, UserCreation
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 
@@ -30,6 +29,17 @@ def home(request):
     
     topic = Topic.objects.all()
     return render(request, 'socialsite/home.html', {'rooms':rooms, 'topic':topic, 'room_count':room_count, 'roommessages':roommessages})
+
+
+@login_required(login_url='/login')
+def addTopic(request):
+    if request.method == 'POST':
+        
+        topicname = request.POST['topic']
+        topic = Topic(name = topicname)
+        topic.save()
+        return redirect('home')
+    return render(request, 'socialsite/createtopic.html')
 
 @login_required(login_url='/login')
 def room(request, pk):
@@ -132,16 +142,17 @@ def logoutuser(request):
 
 def registerPage(request):
     page = 'register'
-    form = UserCreationForm()
+    form = UserCreation()
 
     if request.method == 'POST':
-        form  = UserCreationForm(request.POST)
+        form  = UserCreation(request.POST)
         # registerform = form.copy()
         if form.is_valid():
             user = form.save(commit = False)
-            user.username = user.username.lower()
+            # user.username = user.username.lower()
             user.save()
             login(request, user)
+            # user = User.objects.get(email = user.email)
             return redirect('home')
         return HttpResponse('error')
     return render(request, 'socialsite/login_register.html',{'page':page, 'form':form})

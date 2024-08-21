@@ -8,7 +8,7 @@
                 <p> {% if request.user.id == room.host.id %}
                 <a href="{% url 'update' room.id %}"> <button>Edit</button> </a>
                 <a href="{% url 'delete' room.id %}"> <button> delete</button></a>
-                <p>{{room.host}}</p>
+                {% comment %} <p>{{room.host}}</p> {% endcomment %}
                 {% endif %}</p>
                 <br>
                 <hr>

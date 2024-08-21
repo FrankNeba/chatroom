@@ -8,8 +8,12 @@
         <div class="homecontainer">
 
             <div>
-        {% include 'socialsite/topics.html' %}
-    </div>
+                {% if request.user == user %}
+                <a href="{% url 'addtopic' %}">add topic</a>
+                {% endif%}
+                 
+                {% include 'socialsite/topics.html' %}
+             </div>
 
     <div>
         <h1>Rooms</h1><hr>

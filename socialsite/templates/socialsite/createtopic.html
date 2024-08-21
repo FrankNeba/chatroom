@@ -1,0 +1,12 @@
+{% extends 'main.html' %}
+
+
+{% block content%}
+  <form action="" method="post">
+    {% csrf_token %}
+    <label for="Topic">Enter the Topic name</label>
+    <input type="text" name="topic">
+    <button type="submit">Add</button>
+  </form>
+
+{% endblock content%}

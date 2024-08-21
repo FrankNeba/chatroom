@@ -2,7 +2,7 @@
 
 {% block content%}
 
-    <form action="" method="post">
+    <form action="" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <!-- {% comment %} <label for="username">Username:</label>
         <input type="text" value="{{user.username}}" name="username"><br><br> {% endcomment %}
@@ -19,6 +19,13 @@
 
         <label for="email">Email</label>
         {{form.email}} <br> <br>
+
+        <label for="name">Full Name</label>
+        {{form.name}} <br> <br>
+
+        <label for="avatar">Profile picture</label>
+        {{form.avatar}} <br> <br>
+        <!-- {{form}} -->
 
         <button type="submit">Save</button>
     </form>

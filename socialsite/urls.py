@@ -24,4 +24,6 @@ urlpatterns = [
     path('profile/<str:pk>/', views.userProfile, name='profiles'),
 
     path('editprofile/<str:pk>/', views.editProfile, name='editprofile'),
+
+    path('addtopic', views.addTopic, name='addtopic'),
 ]
