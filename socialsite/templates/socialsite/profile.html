@@ -1,6 +1,61 @@
 {% extends 'main.html' %}
 
 {% block content %}
+
+
+<main class="profile-page layout layout--3">
+    <div class="container">
+     {% include 'socialsite/topics.html' %}
+
+      <!-- Room List Start -->
+      <div class="roomList">
+        <div class="profile">
+          <div class="profile__avatar">
+            <div class="avatar avatar--large active">
+              <img src="{{user.avatar.url}}" />
+            </div>
+          </div>
+          <div class="profile__info">
+            {% if user.name != None %}
+            <h3>{{user.name}}</h3>
+            {% endif %}
+            <p>@{{user.username}}</p>
+            {% if request.user == user %}
+            <a href="{% url 'editprofile' request.user.id %}" class="btn btn--main btn--pill">Edit Profile</a>
+            {% endif %}
+          </div>
+          <div class="profile__about">
+            {% if user.bio != None %}
+            <h3>About</h3>
+            <p>
+              {{user.bio}}
+            </p>
+
+            {% endif %}
+          </div>
+        </div>
+
+        <div class="roomList__header">
+          <div>
+            <h2>Study Rooms Hosted by {{user.username}}</a>
+            </h2>
+          </div>
+        </div>
+        
+        {% include 'socialsite/rooms.html' %}
+      </div>
+      <!-- Room List End -->
+
+      <!-- Activities Start -->
+      {% include 'socialsite/activity.html' %}
+    </div>
+  </main>
+
+
+  {% endblock content %}
+
+
+<!-- 
     <h2>{{user.username|capfirst}}</h2>
     {% if user == request.user %}
     <a href="{% url 'editprofile' request.user.id %}">edit info</a>
@@ -23,8 +78,4 @@
     <div>
         {% include 'socialsite/activity.html' %}
     </div>
-        </div>
-
-    
-
-{% endblock%}
+        </di-->

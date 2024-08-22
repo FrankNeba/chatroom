@@ -26,4 +26,8 @@ urlpatterns = [
     path('editprofile/<str:pk>/', views.editProfile, name='editprofile'),
 
     path('addtopic', views.addTopic, name='addtopic'),
+
+    path('topics', views.allTopics, name='topics'),
+
+    path('activities', views.activities, name="activities"),
 ]
