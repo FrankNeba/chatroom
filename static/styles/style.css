@@ -49,6 +49,7 @@ body {
   font-size: 1.5rem;
   color: var(--color-light-gray);
   background-color: var(--color-bg);
+  /* background-color: #25558f; */
   min-height: 100vh;
 }
 
@@ -234,6 +235,7 @@ a {
 
 .dropdown-menu a:hover {
   background-color: var(--color-dark-medium);
+  /* background-color: #3f1efa; */
 }
 
 .dropdown-menu > a:not(:last-child) {
@@ -441,7 +443,8 @@ a {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -46%);
-  background-color: var(--color-dark);
+  /* background-color: var(--color-dark); */
+  background-color: #386303;
   border-radius: 1rem;
   box-shadow: 1px 1px 6px 3px rgba(0, 0, 0, 0.1);
   overflow: hidden;
